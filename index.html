@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trimester4 - Maternal Mental Health Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF5F7;
+            --rose: #E8B4B8;
+            --deep-rose: #D4858D;
+            --blush: #F5C9CD;
+            --warm-gray: #9B8A8F;
+            --charcoal: #3D2E32;
+            --soft-white: #FFFBFC;
+            --accent-pink: #EFA2A9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+        }
+
+        /* Animated grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--cream) 0%, rgba(255, 248, 240, 0.95) 70%, transparent 100%);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--deep-rose);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--warm-gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--rose);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--deep-rose);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(ellipse at center, rgba(232, 180, 184, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-5%, -10%) scale(1.05); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-text h1 strong {
+            font-weight: 600;
+            color: var(--deep-rose);
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--warm-gray);
+            margin-bottom: 3rem;
+            max-width: 550px;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: var(--deep-rose);
+            color: var(--soft-white);
+            box-shadow: 0 4px 20px rgba(212, 133, 141, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(212, 133, 141, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--deep-rose);
+            border: 2px solid var(--rose);
+        }
+
+        .btn-secondary:hover {
+            background: var(--rose);
+            color: var(--soft-white);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            animation: fadeIn 1.2s ease-out 0.8s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .phone-mockup {
+            position: absolute;
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(135deg, var(--soft-white) 0%, var(--cream) 100%);
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(45, 45, 42, 0.15);
+            padding: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-3deg);
+            transition: transform 0.6s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: translate(-50%, -50%) rotate(0deg) scale(1.02);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--soft-white);
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+        }
+
+        .screen-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .screen-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            margin-bottom: 0.5rem;
+        }
+
+        .screen-subtitle {
+            font-size: 0.75rem;
+            color: var(--warm-gray);
+        }
+
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .progress-bg {
+            stroke: rgba(232, 180, 184, 0.25);
+        }
+
+        .progress-bar {
+            stroke: var(--rose);
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 70;
+            animation: fillProgress 2s ease-out 1.5s both;
+        }
+
+        @keyframes fillProgress {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .score-badge {
+            background: linear-gradient(135deg, var(--rose) 0%, var(--deep-rose) 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0 auto 1.5rem;
+            display: inline-block;
+        }
+
+        .features-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: rgba(232, 180, 184, 0.12);
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--rose);
+            border-radius: 50%;
+        }
+
+        .feature-text {
+            font-size: 0.75rem;
+            color: var(--charcoal);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 5%;
+            background: var(--soft-white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.2;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 3rem 2rem;
+            background: var(--cream);
+            border-radius: 24px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--accent-pink));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(45, 45, 42, 0.1);
+        }
+
+        .feature-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: rgba(232, 180, 184, 0.35);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--deep-rose);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--warm-gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, var(--deep-rose) 0%, var(--rose) 100%);
+            color: var(--soft-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .mission-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .mission p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-top: 5rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            letter-spacing: 0.05em;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 8rem 5%;
+            text-align: center;
+            background: var(--cream);
+        }
+
+        .download h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+        }
+
+        .download p {
+            font-size: 1.2rem;
+            color: var(--warm-gray);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .badge {
+            background: var(--charcoal);
+            color: var(--soft-white);
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .badge:hover {
+            background: var(--deep-rose);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--soft-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .footer-section h4 {
+            color: var(--soft-white);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--rose);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                height: 400px;
+            }
+
+            .phone-mockup {
+                width: 240px;
+                height: 480px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .mission h2 {
+                font-size: 2.8rem;
+            }
+
+            .download h2 {
+                font-size: 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .app-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Trimester4</div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Your mental health
+                    <strong>deserves care beyond birth</strong>
+                </h1>
+                <p>
+                    Trimester4 provides evidence-based screening and tracking for maternal mental health, 
+                    empowering mothers with the tools to monitor their wellbeing during pregnancy and postpartum.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#download" class="btn btn-primary">Get Started</a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="screen-header">
+                            <div class="screen-title">Weekly Check-in</div>
+                            <div class="screen-subtitle">Track your wellbeing journey</div>
+                        </div>
+                        <div class="progress-ring">
+                            <svg width="120" height="120">
+                                <circle class="progress-bg" cx="60" cy="60" r="45"></circle>
+                                <circle class="progress-bar" cx="60" cy="60" r="45"></circle>
+                            </svg>
+                        </div>
+                        <div class="score-badge">Low Risk Score</div>
+                        <div class="features-mini">
+                            <div class="feature-item">
+                                <div class="feature-icon"></div>
+                                <div class="feature-text">EPDS screening completed</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"></div>
+                                <div class="feature-text">Trends tracked over time</div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon"></div>
+                                <div class="feature-text">Resources available 24/7</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-label">Evidence-Based Care</div>
+            <h2 class="section-title">Comprehensive support for maternal mental health</h2>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-number">01</div>
+                <h3>Validated Screening</h3>
+                <p>Evidence-based EPDS and GAD-7 assessments help you monitor depression and anxiety symptoms with clinically validated tools used by healthcare providers worldwide.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">02</div>
+                <h3>Track Your Progress</h3>
+                <p>Visualize your mental health journey with intuitive charts and trend analysis, helping you and your healthcare team understand patterns over time.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">03</div>
+                <h3>Privacy First</h3>
+                <p>Your data stays secure and private. All information is stored locally on your device with optional encrypted cloud backup for your peace of mind.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">04</div>
+                <h3>Crisis Support</h3>
+                <p>Immediate access to crisis resources and hotlines when you need them most, with automatic alerts for concerning scores and direct links to professional help.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">05</div>
+                <h3>Shareable Reports</h3>
+                <p>Generate comprehensive PDF reports to share with your healthcare provider, making conversations about your mental health more productive and informed.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-number">06</div>
+                <h3>Weekly Reminders</h3>
+                <p>Gentle notifications help you maintain consistent screening without overwhelming you, building a sustainable routine for mental health monitoring.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="mission-content">
+            <h2>Maternal mental health matters</h2>
+            <p>
+                Up to 1 in 5 mothers experience perinatal mood and anxiety disorders, yet many go undiagnosed. 
+                Trimester4 bridges the gap between clinical care visits, empowering mothers to take charge of their mental wellbeing.
+            </p>
+            <p>
+                We believe that the fourth trimester—and beyond—deserves the same attention and support as pregnancy itself.
+            </p>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">20%</span>
+                    <span class="stat-label">Of mothers affected by perinatal disorders</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50%</span>
+                    <span class="stat-label">Go undiagnosed without screening</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Private and secure data</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <h2>Start your journey today</h2>
+        <p>Take the first step toward better maternal mental health. Download Trimester4 and begin tracking your wellbeing.</p>
+        
+        <div class="app-badges">
+            <a href="#" class="badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"></path>
+                    <polyline points="9 10 9 17 15 17 15 10"></polyline>
+                </svg>
+                Download on the App Store
+            </a>
+        </div>
+
+        <div class="cta-buttons" style="justify-content: center; margin-top: 3rem;">
+            <a href="#contact" class="btn btn-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Trimester4</h3>
+                <p>Supporting maternal mental health through evidence-based screening and compassionate technology.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">About EPDS</a></li>
+                    <li><a href="#">Mental Health Resources</a></li>
+                    <li><a href="#">Crisis Support</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#mission">Our Mission</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 Trimester4 LLC. All rights reserved. • Portland, Oregon
+        </div>
+    </footer>
+</body>
+</html>
