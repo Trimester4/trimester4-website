@@ -1,2 +1,2 @@
 # trimester4-website
-Website code with netify
+Website code with netlify
